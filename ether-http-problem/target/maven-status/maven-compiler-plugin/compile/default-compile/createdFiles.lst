@@ -1,5 +1,5 @@
-dev/rafex/ether/http/problem/ProblemJsonSupport.class
-dev/rafex/ether/http/problem/ProblemDetails$Builder.class
-dev/rafex/ether/http/problem/ProblemDetails.class
-dev/rafex/ether/http/problem/ProblemHttpErrorMapper.class
-dev/rafex/ether/http/problem/ProblemException.class
+dev/rafex/ether/http/problem/mapper/ProblemHttpErrorMapper.class
+dev/rafex/ether/http/problem/model/ProblemDetails.class
+dev/rafex/ether/http/problem/json/ProblemJsonSupport.class
+dev/rafex/ether/http/problem/model/ProblemDetails$Builder.class
+dev/rafex/ether/http/problem/exception/ProblemException.class
