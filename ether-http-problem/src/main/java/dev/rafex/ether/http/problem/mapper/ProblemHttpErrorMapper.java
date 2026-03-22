@@ -22,19 +22,20 @@ public final class ProblemHttpErrorMapper implements ErrorMapper {
 
     @Override
     public HttpError map(final Throwable error) {
-        if (error instanceof ProblemException problemException && problemException.problem() != null) {
-            final var problem = problemException.problem();
-            return new HttpError(problem.status(), problemCode(problem), safe(problem.detail(), problem.title()));
-        }
-        return fallback.map(error);
+        return switch (error) {
+            case ProblemException pe when pe.problem() != null -> {
+                final var problem = pe.problem();
+                yield new HttpError(problem.status(), problemCode(problem), safe(problem.detail(), problem.title()));
+            }
+            default -> fallback.map(error);
+        };
     }
 
     private static String problemCode(final ProblemDetails problem) {
-        final var code = problem.properties().get("code");
-        if (code instanceof String value && !value.isBlank()) {
-            return value;
-        }
-        return "problem";
+        return switch (problem.properties().get("code")) {
+            case String value when !value.isBlank() -> value;
+            default -> "problem";
+        };
     }
 
     private static String safe(final String detail, final String fallback) {
